@@ -1,0 +1,190 @@
+/* 取引履歴ページ用のスタイル */
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.backButton {
+  background: #6c757d;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
+}
+
+.backButton:hover {
+  background: #5a6268;
+}
+
+.summaryStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.summaryCard {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #e9ecef;
+}
+
+.summaryLabel {
+  font-size: 0.9em;
+  color: #6c757d;
+  margin-bottom: 5px;
+}
+
+.summaryValue {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tradeTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.tradeTable th {
+  background: #667eea;
+  color: white;
+  padding: 15px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.tradeTable td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 0.9em;
+}
+
+.tradeTable tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.dateTime {
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  font-size: 0.8em;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+.symbol {
+  font-weight: bold;
+  color: #333;
+}
+
+.tradeType {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.buy {
+  background: #d4edda;
+  color: #155724;
+}
+
+.sell {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.profit {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.loss {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .backButton {
+    align-self: flex-start;
+  }
+  
+  .summaryStats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .summaryCard {
+    padding: 15px;
+  }
+  
+  .summaryLabel {
+    font-size: 0.8em;
+  }
+  
+  .summaryValue {
+    font-size: 1.2em;
+  }
+  
+  .tableContainer {
+    margin: 0 -20px;
+    border-radius: 0;
+  }
+  
+  .tradeTable th,
+  .tradeTable td {
+    padding: 8px 5px;
+    font-size: 0.8em;
+  }
+  
+  .tradeTable th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
+
+/* 非常に小さい画面用 */
+@media (max-width: 480px) {
+  .summaryStats {
+    grid-template-columns: 1fr;
+  }
+  
+  .tradeTable {
+    min-width: 600px;
+  }
+  
+  .tradeTable th,
+  .tradeTable td {
+    padding: 6px 3px;
+    font-size: 0.75em;
+  }
+}

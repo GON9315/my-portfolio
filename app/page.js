@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function Home() {
   return (
    
-      
+ 
       <div className={styles.heroContainer}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>
@@ -23,6 +23,8 @@ export default function Home() {
 
         </div>
       </div>
+
+      
 
   )
 }

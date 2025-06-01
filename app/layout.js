@@ -1,6 +1,8 @@
 import styles from './layout.module.css'
 import Link from 'next/link'
 
+import './globals.css'  // この行を追加
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">

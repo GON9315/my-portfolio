@@ -24,19 +24,23 @@ export default function Projects() {
         </div>        
 
         <div className={styles.projectCard}>
-          <h3 className={styles.projectTitle}>トレード記録アプリ</h3>
+          <h3 className={styles.projectTitle}>
+            
+            <Link href="/trade" className={styles.projectLink}>
+              トレード記録アプリ
+            </Link>              
+          </h3>
           <p className={styles.projectDescription}>
             個人の投資・トレードの記録を管理するWebアプリケーション。
           </p>
           <ul className={styles.projectFeatures}>
-            <li>取引履歴の登録・編集・削除</li>
-            <li>自動損益計算機能</li>
-            <li>月別・年別パフォーマンス分析</li>
-            <li>チャートによるデータ可視化</li>
-            <li>CSVエクスポート機能</li>
+            <li>カレンダー別の取引履歴の参照</li>
+            <li>自動損益計算機能(未実装)</li>
+            <li>月別・年別パフォーマンス分析(未実装)</li>
+            <li>チャートによるデータ可視化(未実装)</li>
           </ul>
 
-          <p className={styles.projectTech}>使用技術: Next.js, React, Chart.js, SQLite</p>
+          <p className={styles.projectTech}>使用技術: Node.js, Next.js, React, Supabase PostgreSQL, formspree(メール送信機能)</p>
         </div>        
         
         <div className={styles.projectCard}>
