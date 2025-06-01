@@ -35,7 +35,11 @@ export default function Contact() {
         <h2 style={{ color: '#667eea', marginBottom: '15px' }}>
           お問い合わせフォーム
         </h2>
-        <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <form 
+          action="https://formspree.io/f/movwazjp"
+          method="POST"
+          style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
+        >
           <div>
             <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
               お名前:
