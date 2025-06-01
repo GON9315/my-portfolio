@@ -1,0 +1,152 @@
+.contactContainer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: white;
+}
+
+.contactContent {
+  background: white;
+  color: black;
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contactTitle {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contactSubtitle {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sectionTitle {
+  color: #667eea;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+}
+
+.contactInfo {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.contactInfo p {
+  margin: 5px 0;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.formTextarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.submitButton {
+  background: #667eea;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submitButton:hover {
+  background: #5a67d8;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .contactContainer {
+    padding: 20px 10px;
+  }
+  
+  .contactContent {
+    padding: 20px;
+  }
+  
+  .contactTitle {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+  
+  .contactSubtitle {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+  
+  .contactInfo {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .contactInfo p {
+    font-size: 0.9em;
+  }
+  
+  .contactForm {
+    gap: 12px;
+  }
+  
+  .formInput,
+  .formTextarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+  
+  .submitButton {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* タブレット対応 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .contactTitle {
+    font-size: 2.2em;
+  }
+}

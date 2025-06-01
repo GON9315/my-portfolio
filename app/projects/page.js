@@ -1,27 +1,28 @@
+import styles from './projects.module.css'
+
+
 export default function Projects() {
   return (
-    <div style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      minHeight: '100vh',
-      padding: '40px',
-      color: 'white'
-    }}>
-      <div style={{
-        background: 'white',
-        color: 'black',
-        padding: '40px',
-        borderRadius: '10px',
-        maxWidth: '600px',
-        margin: '0 auto'
-      }}>
-        <h1 style={{ fontSize: '2.5em', marginBottom: '30px', textAlign: 'center' }}>
+    <div className={styles.projectsContainer}>
+      <div className={styles.projectsContent}>
+        <h1 className={styles.projectsTitle}>
           Projects
         </h1>
+
+        <div className={styles.projectCard}>
+          <h3 className={styles.projectTitle}>ポートフォリオサイト</h3>
+          <p className={styles.projectDescription}>
+            Next.jsで作成した個人ポートフォリオサイト。レスポンシブデザイン対応で、
+            お問い合わせフォーム機能も実装しています。
+          </p>
+          <p className={styles.projectTech}>使用技術: Next.js, CSS Modules, Formspree</p>
+        </div>        
         
-        <div style={{ marginBottom: '30px' }}>
-          <h2 style={{ color: '#667eea', marginBottom: '15px' }}>
+        <div className={styles.projectCard}>
+          <h2 className={styles.projectTitle}>
             Projects
           </h2>
+          
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
             {['倉庫管理システム', '輸配送管理システム', '消費財倉庫管理システム', '出荷検品システム', 'CMS(自作)','検定会社顧客管理システム'].map(skill => (
               <span key={skill} style={{

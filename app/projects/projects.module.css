@@ -1,0 +1,88 @@
+.projectsContainer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: white;
+}
+
+.projectsContent {
+  background: white;
+  color: black;
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.projectsTitle {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.projectCard {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #667eea;
+}
+
+.projectTitle {
+  color: #667eea;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+}
+
+.projectDescription {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.projectTech {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .projectsContainer {
+    padding: 20px 10px;
+  }
+  
+  .projectsContent {
+    padding: 20px;
+  }
+  
+  .projectsTitle {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  
+  .projectCard {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .projectTitle {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+  
+  .projectDescription {
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+  
+  .projectTech {
+    font-size: 0.8em;
+  }
+}
+
+/* タブレット対応 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .projectsTitle {
+    font-size: 2.2em;
+  }
+}
