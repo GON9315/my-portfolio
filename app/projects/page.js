@@ -15,7 +15,7 @@ export default function Projects() {
         margin: '0 auto'
       }}>
         <h1 style={{ fontSize: '2.5em', marginBottom: '30px', textAlign: 'center' }}>
-          Skills
+          Projects
         </h1>
         
         <div style={{ marginBottom: '30px' }}>
