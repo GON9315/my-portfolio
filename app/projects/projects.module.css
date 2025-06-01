@@ -45,6 +45,28 @@
   font-style: italic;
 }
 
+.projectLink {
+  text-decoration: none;
+  color: #667eea;
+  transition: color 0.3s;
+}
+
+.projectLink:hover {
+  color: #d0d85a;
+  text-decoration: underline;
+}
+
+.projectFeatures {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.projectFeatures li {
+  margin: 5px 0;
+  line-height: 1.4;
+}
+
+
 /* スマホ対応 */
 @media (max-width: 768px) {
   .projectsContainer {
@@ -77,6 +99,13 @@
   
   .projectTech {
     font-size: 0.8em;
+  }
+  .projectFeatures {
+    padding-left: 15px;
+  }
+  
+  .projectFeatures li {
+    font-size: 0.9em;
   }
 }
 

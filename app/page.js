@@ -1,4 +1,6 @@
 import styles from './page.module.css'
+import Link from 'next/link'
+
 export default function Home() {
   return (
    
@@ -14,9 +16,11 @@ export default function Home() {
           <p className={styles.heroDescription}>
             このサイトは私のスキルと作品を紹介するために作りました。
           </p>
-          <button className={styles.heroButton}>
-            プロジェクトを見る
-          </button>
+
+          <Link href="/projects" className={styles.heroButton}>
+              プロジェクトを見る
+          </Link>              
+
         </div>
       </div>
 

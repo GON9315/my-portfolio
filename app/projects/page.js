@@ -1,5 +1,5 @@
 import styles from './projects.module.css'
-
+import Link from 'next/link'
 
 export default function Projects() {
   return (
@@ -10,12 +10,33 @@ export default function Projects() {
         </h1>
 
         <div className={styles.projectCard}>
-          <h3 className={styles.projectTitle}>ポートフォリオサイト</h3>
+          <h3 className={styles.projectTitle}>
+            
+            <Link href="/" className={styles.projectLink}>
+              ポートフォリオサイト
+            </Link>  
+          </h3>
           <p className={styles.projectDescription}>
             Next.jsで作成した個人ポートフォリオサイト。レスポンシブデザイン対応で、
             お問い合わせフォーム機能も実装しています。
           </p>
           <p className={styles.projectTech}>使用技術: Next.js, CSS Modules, Formspree</p>
+        </div>        
+
+        <div className={styles.projectCard}>
+          <h3 className={styles.projectTitle}>トレード記録アプリ</h3>
+          <p className={styles.projectDescription}>
+            個人の投資・トレードの記録を管理するWebアプリケーション。
+          </p>
+          <ul className={styles.projectFeatures}>
+            <li>取引履歴の登録・編集・削除</li>
+            <li>自動損益計算機能</li>
+            <li>月別・年別パフォーマンス分析</li>
+            <li>チャートによるデータ可視化</li>
+            <li>CSVエクスポート機能</li>
+          </ul>
+
+          <p className={styles.projectTech}>使用技術: Next.js, React, Chart.js, SQLite</p>
         </div>        
         
         <div className={styles.projectCard}>
