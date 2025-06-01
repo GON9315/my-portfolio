@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function TradeListPage() {
+// TradeListContentコンポーネントを分離してSuspenseでラップ
+function TradeListContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedDate = searchParams.get('date');
@@ -270,5 +271,30 @@ export default function TradeListPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// ローディングフォールバック
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex items-center justify-center py-8">
+            <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mr-2"></div>
+            <span className="text-gray-600">ページを読み込み中...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// メインコンポーネント
+export default function TradeListPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <TradeListContent />
+    </Suspense>
   );
 }

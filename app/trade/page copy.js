@@ -1,12 +1,30 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 // import { Calendar, TrendingUp, TrendingDown, BarChart3, DollarSign } from 'lucide-react';
 
 export default function TradePage() {
   const router = useRouter();
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 5, 1)); // 2025年6月1日
+  const searchParams = useSearchParams();
+  
+  // URLパラメータから年月を取得、なければ現在の年月を使用
+  const getInitialDate = () => {
+    const yearParam = searchParams.get('year');
+    const monthParam = searchParams.get('month');
+    
+    if (yearParam && monthParam) {
+      const year = parseInt(yearParam);
+      const month = parseInt(monthParam) - 1; // JavaScriptの月は0から始まる
+      console.log('📅 Debug: URL params detected, setting date to:', { year, month: month + 1 });
+      return new Date(year, month, 1);
+    }
+    
+    console.log('📅 Debug: No URL params, using current date');
+    return new Date(2025, 5, 1); // デフォルト: 2025年6月1日
+  };
+  
+  const [currentDate, setCurrentDate] = useState(getInitialDate());
   const [trades, setTrades] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -95,7 +113,12 @@ export default function TradePage() {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dateString = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    router.push(`/trade/list?date=${dateString}`);
+    
+    // 現在表示中の年月をURLパラメータに追加
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+    
+    router.push(`/trade/list?date=${dateString}&returnYear=${currentYear}&returnMonth=${currentMonth}`);
   };
 
   // 今日の日付かチェック
@@ -145,13 +168,15 @@ export default function TradePage() {
   // 指定日の損益を計算
   const getDayProfit = (date) => {
     const dayTrades = getTradesForDate(date);
-    return dayTrades.reduce((sum, trade) => sum + (trade.profit || 0), 0);
+    const profit = dayTrades.reduce((sum, trade) => sum + (trade.profit || 0), 0);
+    return Math.round((profit + Number.EPSILON) * 100) / 100;
   };
 
   // 指定日のpipsを計算
   const getDayPips = (date) => {
     const dayTrades = getTradesForDate(date);
-    return dayTrades.reduce((sum, trade) => sum + (trade.pips || 0), 0);
+    const pips = dayTrades.reduce((sum, trade) => sum + (trade.pips || 0), 0);
+    return Math.round((pips + Number.EPSILON) * 10) / 10;
   };
 
   // 曜日を取得
@@ -171,8 +196,8 @@ export default function TradePage() {
       .flatMap(([, dayTrades]) => dayTrades);
 
     const totalTrades = currentMonthTrades.length;
-    const totalProfit = currentMonthTrades.reduce((sum, trade) => sum + (trade.profit || 0), 0);
-    const totalPips = currentMonthTrades.reduce((sum, trade) => sum + (trade.pips || 0), 0);
+    const totalProfit = Math.round((currentMonthTrades.reduce((sum, trade) => sum + (trade.profit || 0), 0) + Number.EPSILON) * 100) / 100;
+    const totalPips = Math.round((currentMonthTrades.reduce((sum, trade) => sum + (trade.pips || 0), 0) + Number.EPSILON) * 10) / 10;
     const winningTrades = currentMonthTrades.filter(trade => (trade.profit || 0) > 0).length;
     const winRate = totalTrades > 0 ? Math.round((winningTrades / totalTrades) * 100) : 0;
     

@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-// import { Calendar, TrendingUp, TrendingDown, BarChart3, DollarSign } from 'lucide-react';
 
-export default function TradePage() {
+function TradeCalendarContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -228,7 +227,6 @@ export default function TradePage() {
         {/* ヘッダー */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="flex items-center gap-3 mb-2">
-            {/* <Calendar className="w-6 h-6 text-blue-600" /> */}
             📅
             <h1 className="text-2xl font-bold text-gray-900">
               トレード記録カレンダー
@@ -251,7 +249,6 @@ export default function TradePage() {
         {/* 今月の統計 */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            {/* <BarChart3 className="w-5 h-5 text-blue-600" /> */}
             📊
             {getMonthDisplayName()}の統計
           </h3>
@@ -383,10 +380,8 @@ export default function TradePage() {
                       <div className="flex items-center gap-1">
                         <span>{tradeCount}件</span>
                         {dayProfit > 0 ? (
-                          // <TrendingUp className="w-3 h-3" />
                           <span className="text-green-600">📈</span>
                         ) : dayProfit < 0 ? (
-                          // <TrendingDown className="w-3 h-3" />
                           <span className="text-red-600">📉</span>
                         ) : null}
                       </div>
@@ -439,5 +434,30 @@ export default function TradePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// ローディングフォールバック
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex items-center justify-center py-8">
+            <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mr-2"></div>
+            <span className="text-gray-600">ページを読み込み中...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// メインコンポーネント
+export default function TradePage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <TradeCalendarContent />
+    </Suspense>
   );
 }

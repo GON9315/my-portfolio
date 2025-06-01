@@ -8,38 +8,66 @@ export default function TradeListPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedDate = searchParams.get('date');
+  const returnYear = searchParams.get('returnYear');
+  const returnMonth = searchParams.get('returnMonth');
   
   const [trades, setTrades] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // カレンダーに戻るためのURL生成
+  const getReturnUrl = () => {
+    if (returnYear && returnMonth) {
+      return `/trade?year=${returnYear}&month=${returnMonth}`;
+    }
+    return '/trade';
+  };
+
   // 指定日のトレードデータを取得
   const fetchTradesForDate = async (date) => {
     if (!date) return;
+    
+    console.log('🔍 Debug: fetchTradesForDate called with date:', date);
     
     setLoading(true);
     setError(null);
     
     try {
-      const response = await fetch(`/api/trades?date=${date}`);
+      const url = `/api/trades?date=${date}`;
+      console.log('📡 Debug: Fetching from URL:', url);
+      
+      const response = await fetch(url);
+      console.log('📨 Debug: Response status:', response.status);
+      console.log('📨 Debug: Response ok:', response.ok);
       
       if (!response.ok) {
         throw new Error('データの取得に失敗しました');
       }
       
       const data = await response.json();
+      console.log('📊 Debug: Received data:', data);
+      console.log('📊 Debug: Data length:', data.length);
+      console.log('📊 Debug: First trade:', data[0]);
+      
       setTrades(data);
     } catch (err) {
-      console.error('トレードデータ取得エラー:', err);
+      console.error('❌ Debug: Error in fetchTradesForDate:', err);
       setError(err.message);
     } finally {
       setLoading(false);
+      console.log('✅ Debug: fetchTradesForDate completed');
     }
   };
 
   useEffect(() => {
+    console.log('🚀 Debug: useEffect triggered');
+    console.log('🚀 Debug: selectedDate:', selectedDate);
+    console.log('🚀 Debug: searchParams:', Object.fromEntries(searchParams.entries()));
+    
     if (selectedDate) {
       fetchTradesForDate(selectedDate);
+    } else {
+      console.warn('⚠️ Debug: selectedDate is null or undefined');
     }
   }, [selectedDate]);
 
@@ -76,15 +104,16 @@ export default function TradeListPage() {
   // 統計計算
   const stats = {
     totalTrades: trades.length,
-    totalProfit: trades.reduce((sum, trade) => sum + (trade.profit || 0), 0),
-    
+    totalProfit: Math.round((trades.reduce((sum, trade) => sum + (trade.profit || 0), 0) + Number.EPSILON) * 100) / 100,
     totalPips: Math.round((trades.reduce((sum, trade) => sum + (trade.pips || 0), 0) + Number.EPSILON) * 10) / 10,
-// 結果: 68.3
     winningTrades: trades.filter(trade => (trade.profit || 0) > 0).length,
     losingTrades: trades.filter(trade => (trade.profit || 0) < 0).length,
     winRate: trades.length > 0 ? Math.round((trades.filter(trade => (trade.profit || 0) > 0).length / trades.length) * 100) : 0
   };
-  console.log('🚀 Debug: stats.totalPips:', stats.totalPips);
+
+  console.log('📈 Debug: Calculated stats:', stats);
+  console.log('📈 Debug: Current trades state:', trades);
+
   if (!selectedDate) {
     return (
       <div className="min-h-screen bg-gray-50 py-8">
@@ -92,7 +121,7 @@ export default function TradeListPage() {
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">エラー</h1>
             <p className="text-gray-600">日付が指定されていません。</p>
-            <Link href="/trade" className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <Link href={getReturnUrl()} className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
               カレンダーに戻る
             </Link>
           </div>
@@ -116,7 +145,7 @@ export default function TradeListPage() {
               </p>
             </div>
             <Link 
-              href="/trade" 
+              href={getReturnUrl()}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
               ← カレンダーに戻る
@@ -147,12 +176,9 @@ export default function TradeListPage() {
               <div className="text-sm text-gray-600">総損益</div>
             </div>
             <div className="text-center p-3 bg-indigo-50 rounded-lg">
-               
-              <div className={`text-lg md:text-xl font-bold truncate ${stats.totalPips >= 0 ? 'text-green-600' : 'text-red-600'}`} title={`${stats.totalPips > 0 ? '+' : ''}${stats.totalPips}pips`}>
-                {stats.totalPips > 0 ? '+' : ''}{Math.abs(stats.totalPips) >= 1000 
-                  ? `${Math.round(Math.abs(stats.totalPips) / 100) / 10}k`
-                  : stats.totalPips}
-              </div>              
+              <div className={`text-xl font-bold ${getProfitColor(stats.totalPips)}`}>
+                {stats.totalPips > 0 ? '+' : ''}{stats.totalPips}
+              </div>
               <div className="text-sm text-gray-600">総Pips</div>
             </div>
             <div className="text-center p-3 bg-purple-50 rounded-lg">
