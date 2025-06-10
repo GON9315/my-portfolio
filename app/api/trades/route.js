@@ -1,10 +1,17 @@
 // app/api/trades/route.js
 import { createClient } from '@supabase/supabase-js'
 
+// Service Role Keyを使用（環境変数名を変更）
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY // 重要：Service Role Key
 
-const supabase = createClient(supabaseUrl, supabaseKey)
+// サーバーサイド専用クライアント作成
+const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
+  }
+})
 
 // GET - トレードデータ取得
 export async function GET(request) {
@@ -14,7 +21,7 @@ export async function GET(request) {
     const month = searchParams.get('month')
     const date = searchParams.get('date')
 
-    let query = supabase
+    let query = supabaseAdmin
       .from('trades')
       .select('*')
       .order('open_date', { ascending: false })
@@ -58,7 +65,15 @@ export async function POST(request) {
   try {
     const body = await request.json()
 
-    const { data, error } = await supabase
+    // データ検証（例）
+    if (!body.symbol || !body.open_date) {
+      return Response.json(
+        { error: 'Required fields: symbol, open_date' },
+        { status: 400 }
+      )
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('trades')
       .insert([body])
       .select()
@@ -95,7 +110,7 @@ export async function PUT(request) {
       )
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('trades')
       .update(body)
       .eq('id', id)
@@ -139,7 +154,7 @@ export async function DELETE(request) {
       )
     }
 
-    const { error } = await supabase
+    const { error } = await supabaseAdmin
       .from('trades')
       .delete()
       .eq('id', id)
