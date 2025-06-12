@@ -31,17 +31,31 @@ export default function Projects() {
             </Link>              
           </h3>
           <p className={styles.projectDescription}>
-            個人の投資・トレードの記録を管理するWebアプリケーション。
+            個人のシステムトレードの記録を管理するWebアプリケーション。
           </p>
           <ul className={styles.projectFeatures}>
             <li>カレンダー別の取引履歴の参照</li>
-            <li>自動損益計算機能(未実装)</li>
-            <li>月別・年別パフォーマンス分析(未実装)</li>
-            <li>チャートによるデータ可視化(未実装)</li>
           </ul>
 
-          <p className={styles.projectTech}>使用技術: Node.js, Next.js, React, Supabase PostgreSQL, formspree(メール送信機能)</p>
+          <p className={styles.projectTech}>使用技術: Node.js, Next.js, React, Supabase PostgreSQL</p>
         </div>        
+
+        <div className={styles.projectCard}>
+          <h3 className={styles.projectTitle}>
+            
+            <Link href="https://fascinating-cascaron-3aed06.netlify.app/" className={styles.projectLink}>
+              株自動売買アプリケーション
+            </Link>              
+          </h3>
+          <p className={styles.projectDescription}>
+            シグナルを受信し、12:30に引成(後場)で注文を出す株の自動売買
+          </p>
+          <ul className={styles.projectFeatures}>
+            <li>ライセンスがないと利用できません。</li>
+          </ul>
+
+          <p className={styles.projectTech}>使用技術: C#</p>
+        </div>             
         
         <div className={styles.projectCard}>
           <h2 className={styles.projectTitle}>
