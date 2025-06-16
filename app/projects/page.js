@@ -55,7 +55,25 @@ export default function Projects() {
           </ul>
 
           <p className={styles.projectTech}>使用技術: C#</p>
-        </div>             
+        </div>       
+
+        <div className={styles.projectCard}>
+          <h3 className={styles.projectTitle}>
+            
+            <Link href="https://panda-auth-umber.vercel.app/" className={styles.projectLink}>
+              ライセンス管理システム
+            </Link>              
+          </h3>
+          <p className={styles.projectDescription}>
+            配布したツールのライセンスの一覧と利用解除するシステム
+          </p>
+          <ul className={styles.projectFeatures}>
+            <li>ライセンスの一覧表示</li>
+            <li>ライセンスの利用状況と利用解除</li>
+          </ul>
+
+          <p className={styles.projectTech}>使用技術: Node.js, Next.js, React, Supabase PostgreSQL</p>
+        </div>                 
         
         <div className={styles.projectCard}>
           <h2 className={styles.projectTitle}>
