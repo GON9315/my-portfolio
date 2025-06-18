@@ -27,7 +27,7 @@ export default function Projects() {
           <h3 className={styles.projectTitle}>
             
             <Link href="/trade" className={styles.projectLink}>
-              トレード記録アプリ
+              トレード記録システム
             </Link>              
           </h3>
           <p className={styles.projectDescription}>
@@ -38,6 +38,13 @@ export default function Projects() {
           </ul>
 
           <p className={styles.projectTech}>使用技術: Node.js, Next.js, React, Supabase PostgreSQL</p>
+          
+          {/* システム構成図のリンクを追加 */}
+          <div style={{ marginTop: '10px' }}>
+            <Link href="/system" className={styles.projectLink}>
+              システム構成図
+            </Link>
+          </div>
         </div>        
 
         <div className={styles.projectCard}>
