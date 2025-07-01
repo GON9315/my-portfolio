@@ -61,7 +61,7 @@ export default function Projects() {
             <li>ライセンスがないと利用できません。</li>
           </ul>
 
-          <p className={styles.projectTech}>使用技術: C#</p>
+          <p className={styles.projectTech}>使用技術: C#, netlify</p>
         </div>       
 
         <div className={styles.projectCard}>
